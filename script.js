@@ -1,53 +1,42 @@
+const container = document.querySelector(".container")
 let gameChoice = ["rock", "paper", "scissors"];
 let humanScore = 0;
 let computerScore = 0;
+const paper =  document.createElement("button");
+const rock =  document.createElement("button");
+const scissors =  document.createElement("button");
+const result = document.createElement("div")
+paper.textContent = "Paper";
+rock.textContent = "Rock";
+scissors.textContent = "Scissors";
+container.append(paper, rock, scissors, result)
 
 function getComputerChoice() {
   let randomizeChoice = gameChoice[Math.floor(Math.random() * 3)];
   return randomizeChoice;
 }
 
-function getHumanChoice() {
-  const userInput = prompt("Enter your choice: rock, paper, or scissors:");
-  if (userInput === "paper" || userInput === "rock" || userInput === "scissors") {
-    console.log("You chose " + userInput);
-    return userInput;
-  } else {
-    console.log("Error! Invalid choice, try again!");
-    return null;
-  }
-}
 
-function playRound(computerChoice, humanChoice) {
+function playRound(humanChoice) {
+  const computerChoice = getComputerChoice();
    
   if (computerChoice === humanChoice) {
-    console.log("Draw");
+    result.textContent = 'Draw';
   } else if (
     (computerChoice === "rock" && humanChoice === "paper") ||
     (computerChoice === "scissors" && humanChoice === "rock") ||
     (computerChoice === "paper" && humanChoice === "scissors")
   ) {
-    console.log("You win!");
+    result.textContent ="You win!";
     humanScore += 1;
   } else {
-    console.log("You lose!");
+    result.textContent ="You lose!";
     computerScore += 1;
   }
   console.log(`Human Score: ${humanScore}, Computer Score: ${computerScore}`);
 }
 
-function game() {
-    for (let i = 1; i < 6; i++){
-    const computerChoice = getComputerChoice();
-     const humanChoice = getHumanChoice();
+rock.addEventListener('click', () => playRound('rock'));
+paper.addEventListener('click', () => playRound('paper'));
+scissors.addEventListener('click', () => playRound('scissors'));
 
-  if (humanChoice !== null) {
-    playRound(computerChoice, humanChoice);
-  } else {
-    console.log("Round skipped due to invalid human choice.");
-  }
-  
-}
-}
-
-game();
