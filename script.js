@@ -6,10 +6,11 @@ const paper =  document.createElement("button");
 const rock =  document.createElement("button");
 const scissors =  document.createElement("button");
 const result = document.createElement("div")
+const score = document.createElement("div")
 paper.textContent = "Paper";
 rock.textContent = "Rock";
 scissors.textContent = "Scissors";
-container.append(paper, rock, scissors, result)
+container.append(paper, rock, scissors, result, score)
 
 function getComputerChoice() {
   let randomizeChoice = gameChoice[Math.floor(Math.random() * 3)];
@@ -33,7 +34,7 @@ function playRound(humanChoice) {
     result.textContent ="You lose!";
     computerScore += 1;
   }
-  console.log(`Human Score: ${humanScore}, Computer Score: ${computerScore}`);
+ score.textContent =`Human Score: ${humanScore}, Computer Score: ${computerScore}`;
 }
 
 rock.addEventListener('click', () => playRound('rock'));
